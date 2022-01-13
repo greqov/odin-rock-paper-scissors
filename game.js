@@ -5,7 +5,7 @@ TODO:
     [x] get user input (R, P, S) via prompt
     [x] *handle wrong user input
     [x] add button to ask a prompt
-    [] get computer selection
+    [x] get computer selection
     [] define round winner
     [] play N rounds until somebody wins 5 times
 */
@@ -30,7 +30,14 @@ function playerPlay() {
 }
 
 function computerPlay() {
-    // return random value
+    const val = Math.floor(Math.random() * 100) % 3
+    if (val === 0) {
+        return 'R'
+    } else if (val === 1) {
+        return 'S'
+    } else {
+        return 'P'
+    }
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -41,3 +48,6 @@ function playRound(playerSelection, computerSelection) {
 function playGame() {
     // play rounds until 5 wins
 }
+
+const computerSelection = computerPlay()
+console.log(computerSelection);
