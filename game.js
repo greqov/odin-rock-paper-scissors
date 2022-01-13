@@ -1,27 +1,17 @@
 console.log('Horray!')
 
-/*
-TODO:
-    [x] get user input (R, P, S) via prompt
-    [x] *handle wrong user input
-    [x] add button to ask a prompt
-    [x] get computer selection
-    [x] define round winner
-    [] play N rounds until somebody wins 5 times
-*/
-
 let playerWins = 0
 let computerWins = 0
 let roundCounter = 0
+const roundsToWin = 3
 
 document.addEventListener('click', (el) => {
-    if (el.target.id === "playButton") {
-        const playerSelection = playerPlay()
-        if (playerSelection) {
-            const computerSelection = computerPlay()
-            playRound(playerSelection, computerSelection)
-            showStats()
-        }
+    if (el.target.id === "playRound") {
+        startRound()
+    }
+
+    if (el.target.id === "playGame") {
+        playGame()
     }
 })
 
@@ -52,6 +42,22 @@ function computerPlay() {
         return 'S'
     } else {
         return 'P'
+    }
+}
+
+function startRound() {
+    const playerSelection = playerPlay()
+
+    if (playerSelection) {
+        const computerSelection = computerPlay()
+        playRound(playerSelection, computerSelection)
+        showStats()
+    }
+
+    if (playerWins === roundsToWin || computerWins === roundsToWin) {
+        showWinner()
+        console.log('Please start a new game!')
+        document.getElementById('playRound').setAttribute('disabled', true)
     }
 }
 
@@ -105,10 +111,26 @@ function playRound(playerSelection, computerSelection) {
 }
 
 function playGame() {
-    // play rounds until 5 wins
-}
+    playerWins = 0
+    computerWins = 0
+    roundCounter = 0
 
+    document.getElementById('playRound').removeAttribute('disabled')
+    console.clear()
+    console.log('Starting new game')
+    console.log('Press a "Play round" button to start playing')
+}
 
 function showStats() {
     console.log(`[ Player ${playerWins} : ${computerWins} Computer ] ${roundCounter} rounds played`);
+}
+
+function showWinner() {
+    if (playerWins >= roundsToWin) {
+        console.log(`>>> Horray! Player wins in ${roundCounter} rounds! <<<`)
+    }
+
+    if (computerWins >= roundsToWin) {
+        console.log(`>>> Computer wins in ${roundCounter} rounds! <<<`)
+    }
 }
