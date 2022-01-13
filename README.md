@@ -1,3 +1,5 @@
 # Rock, Paper, Scissors game
 
 Link: [ODIN PROJECT: ROCK PAPER SCISSORS](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/rock-paper-scissors)
+
+Live preview: [github pages](https://greqov.github.io/odin-rock-paper-scissors/)
