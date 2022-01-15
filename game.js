@@ -26,15 +26,11 @@ function clearState() {
   state.gameResult = "...";
 }
 
-document.addEventListener("click", (el) => {
-  if (el.target.id === "playGame") {
-    playGame();
-  }
-});
+let ui = getUiElements();
 
-const playBtns = Array.from(document.querySelectorAll(".controls button"));
+ui.newGameBtn.addEventListener("click", playGame);
 
-playBtns.forEach((button) => {
+ui.playBtns.forEach((button) => {
   button.addEventListener("click", (e) => {
     const playerSelection = e.target.value;
     const computerSelection = computerPlay();
@@ -73,39 +69,39 @@ function playRound(playerSelection, computerSelection) {
 
   if (playerSelection === "P") {
     if (computerSelection === "R") {
-      state.playerWins++;
-      state.roundResult = "Player wins";
-      return;
+      addPlayerWin();
     } else {
-      state.computerWins++;
-      state.roundResult = "Computer wins";
-      return;
+      addComputerWin();
     }
   }
 
   if (playerSelection === "R") {
     if (computerSelection === "S") {
-      state.playerWins++;
-      state.roundResult = "Player wins";
-      return;
+      addPlayerWin();
     } else {
-      state.computerWins++;
-      state.roundResult = "Computer wins";
-      return;
+      addComputerWin();
     }
   }
 
   if (playerSelection === "S") {
     if (computerSelection === "P") {
-      state.playerWins++;
-      state.roundResult = "Player wins";
-      return;
+      addPlayerWin();
     } else {
-      state.computerWins++;
-      state.roundResult = "Computer wins";
-      return;
+      addComputerWin();
     }
   }
+}
+
+function addPlayerWin() {
+  state.playerWins++;
+  state.roundResult = "Player wins";
+  return;
+}
+
+function addComputerWin() {
+  state.computerWins++;
+  state.roundResult = "Computer wins";
+  return;
 }
 
 function playGame() {
@@ -116,21 +112,23 @@ function playGame() {
 
 function showWinner() {
   const winner = state.playerWins >= roundsToWin ? "Player" : "Computer";
-  ui.gameResult.innerText = `>>> Horray! ${winner} wins in ${state.roundCounter} rounds! <<<`;
+  ui.gameResult.innerText = `>>> Hooray! ${winner} wins in ${state.roundCounter} rounds! <<<`;
 
   setBtnsState(false);
 }
 
 function setBtnsState(bool) {
   if (bool) {
-    playBtns.forEach((button) => button.removeAttribute("disabled"));
+    ui.playBtns.forEach((button) => button.removeAttribute("disabled"));
   } else {
-    playBtns.forEach((button) => button.setAttribute("disabled", true));
+    ui.playBtns.forEach((button) => button.setAttribute("disabled", true));
   }
 }
 
 function getUiElements() {
   return {
+    newGameBtn: document.querySelector("#playGame"),
+    playBtns: Array.from(document.querySelectorAll(".controls button")),
     playerWins: document.querySelector(".player-wins"),
     computerWins: document.querySelector(".computer-wins"),
     playerPick: document.querySelector(".player-pick"),
@@ -140,8 +138,6 @@ function getUiElements() {
     gameResult: document.querySelector(".game-result"),
   };
 }
-
-let ui = getUiElements();
 
 function updateUI() {
   ui.playerWins.innerText = state.playerWins;
