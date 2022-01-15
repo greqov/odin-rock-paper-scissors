@@ -1,16 +1,30 @@
-console.log("Horray!");
-
 /**
  * TODO
  * [] add IIFE
- * [] create basic UI
  *
  */
 
-let playerWins = 0;
-let computerWins = 0;
-let roundCounter = 0;
 const roundsToWin = 3;
+
+let state = {
+  playerWins: 0,
+  computerWins: 0,
+  playerPick: "...",
+  computerPick: "...",
+  roundCounter: 0,
+  roundResult: "...",
+  gameResult: "...",
+};
+
+function clearState() {
+  state.playerWins = 0;
+  state.computerWins = 0;
+  state.playerPick = "...";
+  state.computerPick = "...";
+  state.roundCounter = 0;
+  state.roundResult = "...";
+  state.gameResult = "...";
+}
 
 document.addEventListener("click", (el) => {
   if (el.target.id === "playGame") {
@@ -19,18 +33,21 @@ document.addEventListener("click", (el) => {
 });
 
 const playBtns = Array.from(document.querySelectorAll(".controls button"));
-console.log(playBtns);
 
 playBtns.forEach((button) => {
   button.addEventListener("click", (e) => {
     const playerSelection = e.target.value;
     const computerSelection = computerPlay();
+    state.playerPick = playerSelection;
+    state.computerPick = computerSelection;
     playRound(playerSelection, computerSelection);
-    showStats();
+    updateUI();
 
-    if (playerWins === roundsToWin || computerWins === roundsToWin) {
+    if (
+      state.playerWins === roundsToWin ||
+      state.computerWins === roundsToWin
+    ) {
       showWinner();
-      console.log("Please start a new game!");
     }
   });
 });
@@ -46,97 +63,91 @@ function computerPlay() {
   }
 }
 
-function startRound() {
-  const playerSelection = playerPlay();
-
-  if (playerSelection) {
-    const computerSelection = computerPlay();
-    playRound(playerSelection, computerSelection);
-    showStats();
-  }
-}
-
 function playRound(playerSelection, computerSelection) {
-  roundCounter++;
-
-  console.log(`Player selects ${playerSelection}`);
-  console.log(`Computer selects ${computerSelection}`);
+  state.roundCounter++;
 
   if (playerSelection === computerSelection) {
-    console.log("Whoa! It's a tie!");
+    state.roundResult = "Whoa! It's a tie!";
     return;
   }
 
   if (playerSelection === "P") {
     if (computerSelection === "R") {
-      playerWins++;
-      console.log("Player wins");
+      state.playerWins++;
+      state.roundResult = "Player wins";
       return;
     } else {
-      computerWins++;
-      console.log("Computer wins");
+      state.computerWins++;
+      state.roundResult = "Computer wins";
       return;
     }
   }
 
   if (playerSelection === "R") {
     if (computerSelection === "S") {
-      playerWins++;
-      console.log("Player wins");
+      state.playerWins++;
+      state.roundResult = "Player wins";
       return;
     } else {
-      computerWins++;
-      console.log("Computer wins");
+      state.computerWins++;
+      state.roundResult = "Computer wins";
       return;
     }
   }
 
   if (playerSelection === "S") {
     if (computerSelection === "P") {
-      playerWins++;
-      console.log("Player wins");
+      state.playerWins++;
+      state.roundResult = "Player wins";
       return;
     } else {
-      computerWins++;
-      console.log("Computer wins");
+      state.computerWins++;
+      state.roundResult = "Computer wins";
       return;
     }
   }
 }
 
 function playGame() {
-  playerWins = 0;
-  computerWins = 0;
-  roundCounter = 0;
-
-  enableBtns(true);
-
-  console.clear();
-  console.log("Starting new game");
-}
-
-function showStats() {
-  console.log(
-    `[ Player ${playerWins} : ${computerWins} Computer ] ${roundCounter} rounds played`
-  );
+  clearState();
+  setBtnsState(true);
+  updateUI();
 }
 
 function showWinner() {
-  if (playerWins >= roundsToWin) {
-    console.log(`>>> Horray! Player wins in ${roundCounter} rounds! <<<`);
-  }
+  const winner = state.playerWins >= roundsToWin ? "Player" : "Computer";
+  ui.gameResult.innerText = `>>> Horray! ${winner} wins in ${state.roundCounter} rounds! <<<`;
 
-  if (computerWins >= roundsToWin) {
-    console.log(`>>> Computer wins in ${roundCounter} rounds! <<<`);
-  }
-
-  enableBtns(false);
+  setBtnsState(false);
 }
 
-function enableBtns(bool) {
+function setBtnsState(bool) {
   if (bool) {
     playBtns.forEach((button) => button.removeAttribute("disabled"));
   } else {
     playBtns.forEach((button) => button.setAttribute("disabled", true));
   }
+}
+
+function getUiElements() {
+  return {
+    playerWins: document.querySelector(".player-wins"),
+    computerWins: document.querySelector(".computer-wins"),
+    playerPick: document.querySelector(".player-pick"),
+    computerPick: document.querySelector(".computer-pick"),
+    roundCounter: document.querySelector(".round-counter"),
+    roundResult: document.querySelector(".round-result"),
+    gameResult: document.querySelector(".game-result"),
+  };
+}
+
+let ui = getUiElements();
+
+function updateUI() {
+  ui.playerWins.innerText = state.playerWins;
+  ui.computerWins.innerText = state.computerWins;
+  ui.playerPick.innerText = state.playerPick;
+  ui.computerPick.innerText = state.computerPick;
+  ui.roundCounter.innerText = state.roundCounter;
+  ui.roundResult.innerText = state.roundResult;
 }

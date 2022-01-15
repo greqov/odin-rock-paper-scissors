@@ -22,16 +22,18 @@
 
     <p>Up to 3 wins</p>
 
-    <p>Open browser console (Ctrl+Shift+I), pick 'Console' tab.</p>
-
-    <button type="button" id="playGame">Play game</button>
+    <button type="button" id="playGame">Play new game</button>
 
     <div class="info">
-      <p>[ Player 0 : 0 Computer ]</p>
-      <p>Rounds: <span class="rounds-count">0</span></p>
-      <p>Player picks &gt; Rock</p>
-      <p>Computer picks &gt; Rock</p>
-      <p>Result: TIE!</p>
+      <p>
+        [ Player <span class="player-wins">0</span> :
+        <span class="computer-wins">0</span> Computer ]
+      </p>
+      <p>Rounds: <span class="round-counter">0</span></p>
+      <p>Player: <span class="player-pick">...</span></p>
+      <p>Computer: <span class="computer-pick">...</span></p>
+      <p>Result: <span class="round-result">...</span></p>
+      <p>Game result: <span class="game-result">...</span></p>
     </div>
 
     <div class="controls">
