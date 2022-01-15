@@ -131,6 +131,7 @@
     ui.computerPick.innerText = state.computerPick;
     ui.roundCounter.innerText = state.roundCounter;
     ui.roundResult.innerText = state.roundResult;
+    ui.gameResult.innerText = state.gameResult;
   }
 
   function clearState() {
