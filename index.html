@@ -11,10 +11,14 @@
             background-color: #333;
             color: #eee;
         }
+
+        a {
+            color: skyblue;
+        }
     </style>
 </head>
 <body>
-    <h1>It's time to play a game!</h1>
+    <h1>Rock, Paper, Scissors</h1>
 
     <p>Open browser console (Ctrl+Shift+I), pick 'Console' tab.</p>
 
@@ -25,6 +29,24 @@
         <br>
         <button type="button" id="playRound" disabled>Play round</button>
     </div>
+
+    <div class="info">
+        <p>[ Player 0 : 0 Computer ]</p>
+        <p>Rounds: <span class="rounds-count">0</span></p>
+        <p>Player picks &gt; Rock</p>
+        <p>Computer picks &gt; Rock</p>
+        <p>Result: TIE!</p>
+    </div>
+
+    <div class="controls">
+        <button type="button" value="R">Rock</button>
+        <button type="button" value="P">Paper</button>
+        <button type="button" value="S">Scissors</button>
+    </div>
+
+    <footer>
+        <a href="https://github.com/greqov/odin-rock-paper-scissors" target="_blank">Github</a>
+    </footer>
 
     <script src="./game.js"></script>
 </body>
