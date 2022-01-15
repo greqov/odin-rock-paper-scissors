@@ -1,7 +1,7 @@
 (function () {
   const roundsToWin = 3;
 
-  let state = {
+  const initState = {
     playerWins: 0,
     computerWins: 0,
     playerPick: "...",
@@ -10,6 +10,8 @@
     roundResult: "...",
     gameResult: "...",
   };
+
+  let state = { ...initState };
 
   let ui = getUiElements();
 
@@ -131,12 +133,6 @@
   }
 
   function clearState() {
-    state.playerWins = 0;
-    state.computerWins = 0;
-    state.playerPick = "...";
-    state.computerPick = "...";
-    state.roundCounter = 0;
-    state.roundResult = "...";
-    state.gameResult = "...";
+    state = { ...initState };
   }
 })();
