@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock, Paper, Scissors</title>
     <style>
-        html {
-            font-family: monospace;
-            background-color: #333;
-            color: #eee;
-        }
+      html {
+        font-family: monospace;
+        background-color: #333;
+        color: #eee;
+      }
 
-        a {
-            color: skyblue;
-        }
+      a {
+        color: skyblue;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Rock, Paper, Scissors</h1>
+
+    <p>Up to 3 wins</p>
 
     <p>Open browser console (Ctrl+Shift+I), pick 'Console' tab.</p>
 
-    <div>
-        <button type="button" id="playGame">Play game</button>
-        <br>
-        <br>
-        <br>
-        <button type="button" id="playRound" disabled>Play round</button>
-    </div>
+    <button type="button" id="playGame">Play game</button>
 
     <div class="info">
-        <p>[ Player 0 : 0 Computer ]</p>
-        <p>Rounds: <span class="rounds-count">0</span></p>
-        <p>Player picks &gt; Rock</p>
-        <p>Computer picks &gt; Rock</p>
-        <p>Result: TIE!</p>
+      <p>[ Player 0 : 0 Computer ]</p>
+      <p>Rounds: <span class="rounds-count">0</span></p>
+      <p>Player picks &gt; Rock</p>
+      <p>Computer picks &gt; Rock</p>
+      <p>Result: TIE!</p>
     </div>
 
     <div class="controls">
-        <button type="button" value="R">Rock</button>
-        <button type="button" value="P">Paper</button>
-        <button type="button" value="S">Scissors</button>
+      <button type="button" value="R">Rock</button>
+      <button type="button" value="P">Paper</button>
+      <button type="button" value="S">Scissors</button>
     </div>
 
     <footer>
-        <a href="https://github.com/greqov/odin-rock-paper-scissors" target="_blank">Github</a>
+      <a
+        href="https://github.com/greqov/odin-rock-paper-scissors"
+        target="_blank"
+        >Github</a
+      >
     </footer>
 
     <script src="./game.js"></script>
-</body>
+  </body>
 </html>
