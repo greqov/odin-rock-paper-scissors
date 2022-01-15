@@ -125,13 +125,9 @@
   }
 
   function updateUI() {
-    ui.playerWins.innerText = state.playerWins;
-    ui.computerWins.innerText = state.computerWins;
-    ui.playerPick.innerText = state.playerPick;
-    ui.computerPick.innerText = state.computerPick;
-    ui.roundCounter.innerText = state.roundCounter;
-    ui.roundResult.innerText = state.roundResult;
-    ui.gameResult.innerText = state.gameResult;
+    for (let key in state) {
+      ui[key].innerText = state[key];
+    }
   }
 
   function clearState() {
